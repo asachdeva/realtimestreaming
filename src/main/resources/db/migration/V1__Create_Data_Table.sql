@@ -1,0 +1,4 @@
+create TABLE IF NOT EXISTS ADT_Payloads (
+  ID long NOT NULL,
+  DATA CLOB NOT NULL
+);

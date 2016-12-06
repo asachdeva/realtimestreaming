@@ -1,0 +1,33 @@
+/data
+/files
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+# Java class files
+*.class
+
+# IntelliJ project files
+.idea/
+/realtimestreaming.ipr
+/realtimestreaming.iml
+/realtimestreaming.iws
+
+
+# Gradle
+.gradle/
+
+# Build and test artifacts
+/build
+
+
+/target/

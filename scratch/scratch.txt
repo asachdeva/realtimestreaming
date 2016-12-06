@@ -1,0 +1,58 @@
+--------------------------------------------------------------------------------------------------------------------------
+ZOOKEEPER
+# Start Zookeeper
+sudo zkserver start
+
+--------------------------------------------------------------------------------------------------------------------------
+KAFKA
+# Kafka Install Dir (HomeBrew)
+cd /usr/local/Cellar/kafka/0.9.0.1/libexec/bin
+
+# Start Daemon
+env JMX_PORT=9999 ./kafka-server-start.sh /usr/local/etc/kafka/server.properties
+./kafka-server-start.sh /usr/local/etc/kafka/server.properties
+
+# Create Topic
+./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic PATIENT_DATA
+
+# List topics
+./kafka-topics.sh --list --zookeeper localhost:2181
+
+# Console Consumer
+./kafka-console-consumer.sh --zookeeper localhost:2181 --topic HL7BookingsDataFeed --from-beginning
+./kafka-console-consumer.sh --zookeeper localhost:2181 --topic HL7AuthBookingsXML --from-beginning
+
+# Purge Topic
+./kafka-topics.sh --zookeeper localhost:2181 --alter --topic HL7BookingsData --config retention.ms=500
+After a minute and purge happens reset the retention.ms to null (will pick up retention.hours(168))
+./kafka-topics.sh --zookeeper localhost:2181 --alter --topic HL7BookingsData --delete-config retention.ms
+
+$ Logs location
+/usr/local/var/lib/kafka-logs
+
+--------------------------------------------------------------------------------------------------------------------------
+# SPARK
+# Install Dir
+cd /usr/local/Cellar/apache-spark/1.6.1/libexec/
+
+# Stop Spark Instance
+./sbin/stop-all.sh
+
+# Start Spark Instance
+./sbin/start-all.sh
+
+--------------------------------------------------------------------------------------------------------------------------
+# HADOOP/Hdfs
+http://zhongyaonan.com/hadoop-tutorial/setting-up-hadoop-2-6-on-mac-osx-yosemite.html
+
+# Install Dir
+cd /usr/local/Cellar/hadoop/2.7.2
+
+# Stop Name Node Daemon and DataNode Daemon
+./sbin/start-dfs.sh
+
+# Start Spark Instance
+./sbin/start-all.sh
+
+--------------------------------------------------------------------------------------------------------------------------
+
